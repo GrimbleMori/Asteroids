@@ -1,32 +1,44 @@
+import pygame
+from logger import log_state
 from constants import *
 import player as pl
-from logger import log_state
-import pygame
+import asteroid as ast
+import asteroidfield as af
+
+
 
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Creating the screen.
+    clock = pygame.time.Clock() # Initializing a Clock.
+    dt = 0 # Date/time variable.
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(F"Screen width: {SCREEN_WIDTH}")
     print(F"Screen height: {SCREEN_HEIGHT}")
-    clock = pygame.time.Clock()
-    dt = 0
-    updatable = pygame.sprite.Group()
+
+    updatable = pygame.sprite.Group() # Pygame groups.
     drawable = pygame.sprite.Group()
-    pl.Player.containers = (updatable, drawable)
-    player = pl.Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
-    while True:
+    asteroids = pygame.sprite.Group()
+    pl.Player.containers = (updatable, drawable) # Class containers.
+    ast.Asteroid.containers = (asteroids, updatable, drawable) 
+    af.AsteroidField.containers = (updatable,) 
+    player = pl.Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2) # Player start position.
+    asteroidfield = af.AsteroidField() # AsteroidField object.
+
+
+    while True: # Game loop.
         log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
-        screen.fill("black")
-        updatable.update(dt)
+                return # Exit sequence for game.
+        screen.fill("black") 
+        updatable.update(dt) # Updating the updatable group.
         for sprite in drawable:
-            sprite.draw(screen)
+            sprite.draw(screen) # Drawing all objects in drawable group.
         pygame.display.flip()
-        dt = clock.tick(60) / 1000
+        dt = clock.tick(60) / 1000 # Framerate/ticks.
+    
         
 
 
