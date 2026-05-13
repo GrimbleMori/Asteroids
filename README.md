@@ -1,2 +1,2 @@
-# asteroids
+# Asteroids
 Created Asteroids using Pygame
