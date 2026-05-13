@@ -46,11 +46,6 @@ def main():
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
-            # for other_asteroid in asteroids:
-            #     if asteroid.collides_with(other_asteroid) == True:
-            #         log_event("asteroid_collision")
-            #         asteroid.split()
-            #         other_asteroid.split()
         for sprite in drawable:
             sprite.draw(screen) # Drawing all objects in drawable group.
         pygame.display.flip()
