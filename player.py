@@ -37,9 +37,8 @@ class Player(cs.CircleShape):
         if keys[pygame.K_SPACE]:
             if self.cooldown_timer > 0:
                 return # prevents shooting
-            else:
-                self.shoot()
-                self.cooldown_timer = constants.PLAYER_SHOOT_COOLDOWN_SECONDS
+            self.shoot()
+            self.cooldown_timer = constants.PLAYER_SHOOT_COOLDOWN_SECONDS
     
     def move(self, dt):
         self.position
